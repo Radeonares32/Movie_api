@@ -6,7 +6,7 @@ router.get("/",(req,res,next)=>{
   const find = movie.find({ });
   find.then(data=>res.json(data)).catch(err=>next(err));
 });
-router.post('/', function(req, res, next) {
+router.post('/new', function(req, res, next) {
   const data = req.body;
   const Movie = new movie(req.body);
   const promise = Movie.save();
