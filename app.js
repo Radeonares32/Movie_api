@@ -8,6 +8,14 @@ const indexRouter = require('./routes/index');
 const movie = require('./routes/movie');
 const directors = require("./routes/directors");
 const user  = require('./routes/user');
+//secret_keys
+
+const secret = require("./secret"); 
+
+//middleware
+const tokenverify = require('./middleware/verify-token'); 
+const verifyToken = require('./middleware/verify-token');
+
 // db
 const mongo = require("./helper/db")();
 const app = express();
@@ -15,6 +23,10 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// secret keys
+
+app.set('secret_keys',secret.secret_keys);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/api/movies', movie);
 app.use('/api/directors',directors);
 app.use('/user',user);
+app.use('/api',verifyToken);
 
 
 // catch 404 and forward to error handler
