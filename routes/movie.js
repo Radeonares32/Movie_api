@@ -43,7 +43,7 @@ router.put("/:movie_id",(req,res)=>{
 });
 router.delete("/:movie_id",(req,res)=>{
   const deleted = movie.findByIdAndRemove(req.params.movie_id,{useFindAndModify:false});
-  deleted.then(data=>res.json(data)).catch(err=>res.json(err));
+  deleted.then(data=>res.json({status:1})).catch(err=>res.json(err));
 });
 router.get("/between/:start_year/:end_year",(req,res)=>{
   const between = movie.find({
